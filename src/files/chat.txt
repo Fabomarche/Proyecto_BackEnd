@@ -1,0 +1,32 @@
+[
+  {
+    "user": "fabo@a.com",
+    "message": "Hola!",
+    "date": "28/11/2021 22:35:30"
+  },
+  {
+    "user": "ernesto@h.com",
+    "message": "como va?",
+    "date": "28/11/2021 22:35:56"
+  },
+  {
+    "user": "fabo@a.com",
+    "message": "bien",
+    "date": "28/11/2021 22:36:03"
+  },
+  {
+    "user": "ernesto@h.com",
+    "message": "bárbaro!!!",
+    "date": "28/11/2021 22:36:17"
+  },
+  {
+    "user": "tercero@endiscordia.com",
+    "message": "aguante el escabio!",
+    "date": "28/11/2021 22:36:56"
+  },
+  {
+    "user": "ernesto@h.com",
+    "message": "salud!!1",
+    "date": "28/11/2021 22:38:22"
+  }
+]

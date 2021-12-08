@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "remera",
+    "timestamp": 1638905269134,
+    "description": "",
+    "code": "",
+    "stock": 0,
+    "price": "1200",
+    "thumbnail": "http://localhost:8080/images/1637439820802image.jpeg"
+  },
+  {
+    "id": 2,
+    "timestamp": 1638905269144,
+    "description": "",
+    "code": "",
+    "stock": 0,
+    "title": "buzo",
+    "price": "4562",
+    "thumbnail": "http://localhost:8080/images/1637595159751image.jpeg"
+  },
+  {
+    "id": 3,
+    "title": "almohadon",
+    "timestamp": 1638905269234,
+    "description": "",
+    "code": "",
+    "stock": 0,
+    "price": "1111",
+    "thumbnail": "http://localhost:8080/images/1637595629694image.jpeg"
+  },
+  {
+    "id": 4,
+    "timestamp": 1638905790809,
+    "title": "Bolsa",
+    "description": "",
+    "code": "",
+    "price": "1500",
+    "thumbnail": "http://localhost:8080/images/1638128354918image.jpeg",
+    "stock": 0
+  },
+  {
+    "id": 5,
+    "timestamp": 1638905790311,
+    "title": "Campera",
+    "description": "",
+    "code": "",
+    "price": "2500",
+    "thumbnail": "http://localhost:8080/images/1638905790296image.jpeg",
+    "stock": 0
+  },
+  {
+    "id": 6,
+    "timestamp": 1638907484731,
+    "title": "Campera Jean",
+    "description": "",
+    "code": "",
+    "price": "3500",
+    "thumbnail": "http://localhost:8080/images/1638907484717image.jpeg",
+    "stock": 0
+  }
+]

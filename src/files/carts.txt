@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "cartTimestamp": 1638893749313,
+    "products": [
+      {
+        "id": 3,
+        "title": "almohadon",
+        "timestamp": 1638905269234,
+        "description": "",
+        "code": "",
+        "stock": 0,
+        "price": "1111",
+        "thumbnail": "http://localhost:8080/images/1637595629694image.jpeg"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "cartTimestamp": 1638893793847,
+    "products": []
+  },
+  {
+    "id": 3,
+    "cartTimestamp": 1638893886451,
+    "products": []
+  },
+  {
+    "id": 4,
+    "cartTimestamp": 1638894858691,
+    "products": [
+      {
+        "id": 5,
+        "timestamp": 1638905790311,
+        "title": "Campera",
+        "description": "",
+        "code": "",
+        "price": "2500",
+        "thumbnail": "http://localhost:8080/images/1638905790296image.jpeg",
+        "stock": 0
+      },
+      {
+        "id": 2,
+        "timestamp": 1638905269144,
+        "description": "",
+        "code": "",
+        "stock": 0,
+        "title": "buzo",
+        "price": "4562",
+        "thumbnail": "http://localhost:8080/images/1637595159751image.jpeg"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "cartTimestamp": 1638894921771,
+    "products": []
+  },
+  {
+    "id": 6,
+    "cartTimestamp": 1638894984435,
+    "products": [
+      {
+        "id": 2,
+        "timestamp": 1638905269144,
+        "description": "",
+        "code": "",
+        "stock": 0,
+        "title": "buzo",
+        "price": "4562",
+        "thumbnail": "http://localhost:8080/images/1637595159751image.jpeg"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "cartTimestamp": 1638895027370,
+    "products": []
+  }
+]

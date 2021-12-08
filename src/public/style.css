@@ -1,0 +1,11 @@
+.user {
+  color: blue;
+  font-weight: bold;
+}
+.date {
+  color: brown;
+}
+.message {
+  color: green;
+  font-style: italic;
+}

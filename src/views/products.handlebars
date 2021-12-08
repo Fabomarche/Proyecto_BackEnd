@@ -1,0 +1,16 @@
+<div class="container">
+    <button onclick="location.href='/'" class="btn btn-outline-dark">Back to Form</button>
+    <div class='container d-flex flex-row flex-wrap justify-content-center'>
+        {{#if products}}
+            {{#each products}}
+                <div class="card w-25 text-center m-1 shadow">
+                    <h3>{{this.title}}</h3>
+                    <p>price: ${{this.price}}</p>
+                    <img src={{this.thumbnail}} alt="">
+                </div>
+            {{/each}}
+        {{else}}
+            <h2>Theres no products</h2>
+        {{/if}}
+    </div>
+</div>
