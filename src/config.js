@@ -3,7 +3,8 @@ import __dirname from './utils.js'
 
 export const sqlite = knex({
     client:'sqlite3',
-    connection:{filename:__dirname+'/db/ecommerce.sqlite'}
+    connection:{filename:__dirname+'/db/ecommerce.sqlite'},
+    useNullAsDefault: true
 })
 
 export const mariadb = knex({

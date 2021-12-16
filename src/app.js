@@ -1,8 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 import upload from './services/upload.js'
-import Container from './classes/Container.js'//fs
 import Products from './services/Products.js' //mariadb
+import Chats from './services/Chats.js' //sqlite
 import { engine } from 'express-handlebars'
 import __dirname from './utils.js'
 import { Server } from 'socket.io'
@@ -14,9 +14,9 @@ const server = app.listen(PORT, () => {
 })
 export const io = new Server(server)
 
-const productsService = new Products()// mariadb
-const productsContainer = new Container('products');//fs
-const chatContainer = new Container('chat')
+const productsService = new Products() // mariadb
+const chatsService = new Chats() // sqlite
+
 
 app.engine('handlebars', engine())
 app.set('views', __dirname+'/views')
@@ -42,12 +42,8 @@ app.use('/api/cart', cartsRouter)
 
 app.use(upload.single('image'))
 
-
-
 import productsRouter from './routes/products.js'
 import cartsRouter from './routes/cart.js'
-
-
 
 app.post('/api/uploadImage', upload.single('image'), (req,res) => {
     const image = req.file
@@ -61,7 +57,7 @@ app.get('/views/products', (req,res)=>{
     productsService.getAllProducts()
     .then(result => {
         let preparedObj ={
-            products : result
+            products : result.payload
         }
         res.render('products', preparedObj)
     })
@@ -71,15 +67,14 @@ app.get('/views/products', (req,res)=>{
 io.on('connection', async socket => {
     console.log(`the socket ${socket.id} is connected`)
     let products = await productsService.getAllProducts()
-    socket.emit('deliverProducts', products)
-    
-    socket.emit('messagelog', await chatContainer.getAll())
+    socket.emit('deliverProducts', products.payload)
+    let allChats = await chatsService.getAllChats()
+    socket.emit('messagelog', allChats.payload)
 
     socket.on('message', async data => {
         console.log(data)
-        await chatContainer.saveChat(data)
-        io.emit('messagelog', await chatContainer.getAll())
-        
+        await chatsService.saveChat(data)
+        io.emit('messagelog', await chatsService.getAllChats())
     })
 })
 //--------- end socket ----------------//

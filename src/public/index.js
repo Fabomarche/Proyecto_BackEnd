@@ -44,7 +44,7 @@ socket.on('deliverProducts', data => {
     })
 })
 
-//-----------Fin Socket Events-----------//
+//-----------End Socket Events-----------//
 
 const sendForm = (event) => {
     event.preventDefault()
@@ -58,7 +58,7 @@ const sendForm = (event) => {
         return result.json()
     }).then(json => {
         console.log(json)
-        return {status:"success", message:"Producto Agregado"}
+        return {status:"success", message:"Product added"}
     })
     .then(result => location.href='/')
 }
