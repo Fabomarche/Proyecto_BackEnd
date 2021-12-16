@@ -24,7 +24,7 @@ router.get('/id?', (req, res) => {
         if(result !== null){
             res.send(result);
         } else{
-            res.send({ error : 'producto no encontrado' })
+            res.send({ error : 'product not finded' })
         }
     })
 })
@@ -36,7 +36,7 @@ router.get('/:pid', (req, res) => {
         if(result !== null){
             res.send(result);
         } else{
-            res.send({ error : 'producto no encontrado' })
+            res.send({ error : 'product not finded' })
         }
     })
 })
@@ -47,10 +47,15 @@ router.post('/', authMiddleware, upload.single('image'), (req, res) => {
     let file = req.file
     let product = req.body
     product.thumbnail = req.protocol+"://"+req.hostname+":8080"+'/images/'+file.filename
-    productsContainer.save(product)
+    if(!product.title || !product.price || !product.stock) {
+        return res.send({
+            status:'error', message:'incomplete data'
+        })
+    }    
+    productsService.addProduct(product)
     .then(result => {
         res.send(result)
-        productsContainer.getAll().then(result => {
+        productsService.getAllProducts().then(result => {
             io.emit('deliverProducts', result)
         })
     })
@@ -60,7 +65,7 @@ router.post('/', authMiddleware, upload.single('image'), (req, res) => {
 router.put('/:pid', authMiddleware, (req,res) => {
     let body = req.body;
     let id = parseInt(req.params.pid)
-    productsContainer.updateProduct(id,body).then(result=>{
+    productsService.updateProduct(id,body).then(result=>{
         res.send(result);
     })
 })
@@ -68,7 +73,7 @@ router.put('/:pid', authMiddleware, (req,res) => {
 //DELETES
 router.delete('/:pid', authMiddleware, (req,res) => {
     let id = parseInt(req.params.pid)
-    productsContainer.deleteById(id).then(result => {
+    productsService.deleteProductById(id).then(result => {
         res.send(result)
     })
 }) 

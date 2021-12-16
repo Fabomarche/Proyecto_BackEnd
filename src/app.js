@@ -1,7 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 import upload from './services/upload.js'
-import Container from './classes/Container.js'
+import Container from './classes/Container.js'//fs
+import Products from './services/Products.js' //mariadb
 import { engine } from 'express-handlebars'
 import __dirname from './utils.js'
 import { Server } from 'socket.io'
@@ -13,14 +14,15 @@ const server = app.listen(PORT, () => {
 })
 export const io = new Server(server)
 
-const productsContainer = new Container('products');
+const productsService = new Products()// mariadb
+const productsContainer = new Container('products');//fs
 const chatContainer = new Container('chat')
 
 app.engine('handlebars', engine())
 app.set('views', __dirname+'/views')
 app.set('view engine', 'handlebars')
 
-const admin = false
+const admin = true
 
 app.use(express.json());
 app.use(cors())
@@ -56,7 +58,7 @@ app.post('/api/uploadImage', upload.single('image'), (req,res) => {
 })
 
 app.get('/views/products', (req,res)=>{
-    productsContainer.getAll()
+    productsService.getAllProducts()
     .then(result => {
         let preparedObj ={
             products : result
@@ -68,7 +70,7 @@ app.get('/views/products', (req,res)=>{
 //--------- socket ----------------//
 io.on('connection', async socket => {
     console.log(`the socket ${socket.id} is connected`)
-    let products = await productsContainer.getAll()
+    let products = await productsService.getAllProducts()
     socket.emit('deliverProducts', products)
     
     socket.emit('messagelog', await chatContainer.getAll())
@@ -80,10 +82,6 @@ io.on('connection', async socket => {
         
     })
 })
-
-
-
-
 //--------- end socket ----------------//
 
 app.use('/*', (req,res)=> res.send({
