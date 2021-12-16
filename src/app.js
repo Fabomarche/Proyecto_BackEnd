@@ -6,7 +6,6 @@ import { engine } from 'express-handlebars'
 import __dirname from './utils.js'
 import { Server } from 'socket.io'
 
-
 const app = express()
 const PORT = process.env.PORT || 8080
 const server = app.listen(PORT, () => {

@@ -4,18 +4,22 @@ import upload from '../services/upload.js'
 import { io } from '../app.js'
 import { authMiddleware } from '../utils.js'
 
+import Products from '../services/Products.js'
+const productsService = new Products()
+//fs
 import Container from '../classes/Container.js'
 const productsContainer = new Container('products');
+//
 
 //GETS
 router.get('/', (req, res) => {
-    productsContainer.getAll()
+    productsService.getAllProducts()
     .then(result => res.send(result))
 })
 
 router.get('/id?', (req, res) => {
     let pid = parseInt(req.query.id)
-    productsContainer.getById(pid)
+    productsService.getProductById(pid)
     .then(result=>{
         if(result !== null){
             res.send(result);
@@ -27,7 +31,7 @@ router.get('/id?', (req, res) => {
 
 router.get('/:pid', (req, res) => {
     let id = parseInt(req.params.pid);
-    productsContainer.getById(id)
+    productsService.getProductById(id)
     .then(result=>{
         if(result !== null){
             res.send(result);
