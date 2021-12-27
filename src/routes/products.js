@@ -3,14 +3,18 @@ const router = express.Router()
 import upload from '../services/upload.js'
 import { io } from '../app.js'
 import { authMiddleware } from '../utils.js'
+import { productsModel } from './src/dao/model/products.js'
 
-import Container from '../classes/Container.js'
-const productsContainer = new Container('products');
+import ProductsService from '../services/productsService.js'
+const service = new ProductsService()
 
 //GETS
-router.get('/', (req, res) => {
-    productsContainer.getAll()
-    .then(result => res.send(result))
+router.get('/', async (req, res) => {
+    service.getAllProducts()
+    .then(result => {
+        console.log(result)
+        res.send(result)
+    })
 })
 
 router.get('/id?', (req, res) => {

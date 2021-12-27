@@ -20,8 +20,9 @@ const ProductsSchema = new mongoose.Schema({
         required:true
     },
     code: {
-        type:Number,
-        required:false
+        type:String,
+        required:false,
+        unique: true
     },
     thumbnail: {
         type:String,
@@ -30,4 +31,4 @@ const ProductsSchema = new mongoose.Schema({
 
 })
 
-export const productsService = mongoose.model(collectionRef, ProductsSchema)
+export const productsModel = mongoose.model(collectionRef, ProductsSchema)
