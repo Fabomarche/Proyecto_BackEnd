@@ -1,4 +1,4 @@
-import { productsModel } from "../dao/model/products";
+import { productsModel } from "../daos/model/products";
 
 export default class ProductsService{
     getAllProducts = async () => {

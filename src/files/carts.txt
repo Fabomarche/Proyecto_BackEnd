@@ -48,6 +48,16 @@
         "title": "buzo",
         "price": "4562",
         "thumbnail": "http://localhost:8080/images/1637595159751image.jpeg"
+      },
+      {
+        "id": 3,
+        "title": "almohadon",
+        "timestamp": 1638905269234,
+        "description": "",
+        "code": "",
+        "stock": 0,
+        "price": "1111",
+        "thumbnail": "http://localhost:8080/images/1637595629694image.jpeg"
       }
     ]
   },

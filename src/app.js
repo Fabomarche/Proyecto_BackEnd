@@ -1,11 +1,10 @@
 import express from 'express'
 import cors from 'cors'
 import upload from './services/upload.js'
-import Container from './classes/Container.js'
+import Container from './containers/Container.js'
 import { engine } from 'express-handlebars'
 import __dirname from './utils.js'
 import { Server } from 'socket.io'
-
 
 const app = express()
 const PORT = process.env.PORT || 8080
@@ -21,7 +20,7 @@ app.engine('handlebars', engine())
 app.set('views', __dirname+'/views')
 app.set('view engine', 'handlebars')
 
-const admin = false
+const admin = true
 
 app.use(express.json());
 app.use(cors())
