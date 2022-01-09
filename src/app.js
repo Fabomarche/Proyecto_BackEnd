@@ -4,7 +4,9 @@ import upload from './services/upload.js'
 import Container from './containers/Container.js'
 import { engine } from 'express-handlebars'
 import __dirname from './utils.js'
+import { generate } from './utils.js'
 import { Server } from 'socket.io'
+import { chats, products } from './daos/index.js'
 
 const app = express()
 const PORT = process.env.PORT || 8080
@@ -14,7 +16,7 @@ const server = app.listen(PORT, () => {
 export const io = new Server(server)
 
 const productsContainer = new Container('products');
-const chatContainer = new Container('chat')
+// const chatContainer = new Container('chat')
 
 app.engine('handlebars', engine())
 app.set('views', __dirname+'/views')
@@ -56,35 +58,46 @@ app.post('/api/uploadImage', upload.single('image'), (req,res) => {
 })
 
 app.get('/views/products', (req,res)=>{
-    productsContainer.getAll()
+    products.getAll()
     .then(result => {
         let preparedObj ={
             products : result
         }
+        // console.log(preparedObj.products.payload)
         res.render('products', preparedObj)
     })
 })
 
-//--------- socket ----------------//
+app.get('/api/products-test', (req,res) => {
+    let fakerProducts = generate()
+    res.send({state:"succes", payload:fakerProducts})
+})
+
+app.get('/views/products-test', (req,res) => {
+    let preparedObj = {
+        products : generate()
+    }
+    res.render('fakerProducts', preparedObj)
+})
+
+
+//-------------------- socket ----------------//
 io.on('connection', async socket => {
     console.log(`the socket ${socket.id} is connected`)
-    let products = await productsContainer.getAll()
-    socket.emit('deliverProducts', products)
+    let allProducts = await products.getAll()
     
-    socket.emit('messagelog', await chatContainer.getAll())
+    socket.emit('deliverProducts', allProducts.payload)
+    
+    socket.emit('messagelog', await chats.getAll())
 
     socket.on('message', async data => {
-        console.log(data)
-        await chatContainer.saveChat(data)
-        io.emit('messagelog', await chatContainer.getAll())
-        
+        await chats.saveChat(data)
+        io.emit('messagelog', await chats.getAll())
     })
 })
 
 
-
-
-//--------- end socket ----------------//
+//------------------ end socket ----------------//
 
 app.use('/*', (req,res)=> res.send({
     error:-2,

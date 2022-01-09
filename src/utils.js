@@ -14,3 +14,23 @@ export const authMiddleware = (req,res,next) => {
 }
 
 export default __dirname
+
+
+//----------------FAKER----------------------------//
+
+import faker from 'faker'
+
+export const generate = (n = 5) => {
+    let products = []
+    for(let i = 0; i < n; i++){
+        products.push({
+            title:faker.commerce.productName(),
+            stock:faker.datatype.number(),
+            price:faker.commerce.price(),
+            code:faker.datatype.number(),
+            thumbnail:faker.image.imageUrl(),
+            description:faker.commerce.productDescription()
+        })
+    }
+    return products
+}

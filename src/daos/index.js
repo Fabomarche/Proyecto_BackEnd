@@ -1,5 +1,6 @@
 let products;
 let carts;
+let chats;
 let persistence = "mongo";
 
 switch(persistence){
@@ -12,8 +13,10 @@ switch(persistence){
     case "mongo":
         const {default:ProductMongo} = await import ('./products/productMongo.js')
         const {default:CartMongo} = await import ('./carts/cartMongo.js')
+        const {default:ChatMongo} = await import ('./chats/chatMongo.js')
         products = new ProductMongo
         carts =  new CartMongo
+        chats = new ChatMongo
         break
     case "firebase":
         const {default:ProductFirebase} = await import ('./products/productFirebase.js')
@@ -23,4 +26,4 @@ switch(persistence){
         break
 }
 
-export {products, carts, persistence}
+export {products, carts, chats, persistence}

@@ -1,16 +1,28 @@
 const socket = io()
-let user = document.getElementById('user')
+let email = document.getElementById('email')
+let firstName = document.getElementById('name')
+let lastName = document.getElementById('lastName')
+let age = document.getElementById('age')
+let alias = document.getElementById('alias')
+let avatarUrl = document.getElementById('avatarUrl')
 let input = document.getElementById('message')
 let submit = document.getElementById('submit')
 
 //-----------Socket Events------------//
 submit.addEventListener('click', () => {
     let date = new Date()
-    if(input.value && user.value){
+    if(input.value && email.value){
         socket.emit('message', 
             {
-            user:user.value, 
-            message:message.value, 
+                author:{
+                    id:email.value,
+                    firstName: firstName.value,
+                    lastName:lastName.value,
+                    age:age.value,
+                    alias:alias.value,
+                    avatarUrl:avatarUrl.value,
+                },
+            text:message.value, 
             date:date.toLocaleString()
             }
     )}else{
@@ -20,11 +32,14 @@ submit.addEventListener('click', () => {
 
 socket.on('messagelog', data => {
     let divLog = document.getElementById('log')
-    let allMessages = data.map(message => {
-        return  `<div class="d-flex justify-content-center">
-                    <p class="user me-1">${message.user}</p>
+    let allMessages = data.payload.map(message => {
+        return  `<div class="d-flex justify-content-center align-items-center">
+                    <p class="user me-1">${message.author.id}</p>
                     <p class="date me-2">[${message.date}]:</p>
-                    <p class="message">${message.message}</p>
+                    <p class="message">${message.text}</p>
+                    <div class="ms-2">
+                        <img src=${message.author.avatarUrl} class=" rounded-circle w-25"/>
+                    </div>
                 </div>`
     }).join('')
     divLog.innerHTML = allMessages
