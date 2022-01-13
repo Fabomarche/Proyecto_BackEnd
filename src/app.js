@@ -8,6 +8,7 @@ import { generate } from './utils.js'
 import { Server } from 'socket.io'
 import { chats, products } from './daos/index.js'
 
+
 const app = express()
 const PORT = process.env.PORT || 8080
 const server = app.listen(PORT, () => {
@@ -87,7 +88,7 @@ io.on('connection', async socket => {
     let allProducts = await products.getAll()
     
     socket.emit('deliverProducts', allProducts.payload)
-    
+    chats.getAllNormalizedChats()
     socket.emit('messagelog', await chats.getAll())
 
     socket.on('message', async data => {

@@ -1,4 +1,7 @@
 const socket = io()
+
+import { denormalize } from 'normalizr'
+
 let email = document.getElementById('email')
 let firstName = document.getElementById('name')
 let lastName = document.getElementById('lastName')
@@ -32,7 +35,8 @@ submit.addEventListener('click', () => {
 
 socket.on('messagelog', data => {
     let divLog = document.getElementById('log')
-    let allMessages = data.payload.map(message => {
+    let denormalizedData = denormalize(data.payload.result, posts, data.payload.entities)
+    let allMessages = denormalizedData.map(message => {
         return  `<div class="d-flex justify-content-center align-items-center">
                     <p class="user me-1">${message.author.id}</p>
                     <p class="date me-2">[${message.date}]:</p>

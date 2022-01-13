@@ -1,4 +1,5 @@
 import MongoContainer from "../../containers/MongoContainer.js";
+import { normalize, schema } from 'normalizr'
 
 export default class ChatMongo extends MongoContainer{
     constructor(){
@@ -46,6 +47,24 @@ export default class ChatMongo extends MongoContainer{
             }, { timestamps: true }
         )
     }
+
+    getAllNormalizedChats = async() => {
+        try{
+            let documents = await this.collection.find()
+            let chats = {id:'chats', chats:documents}
+            console.log(chats)
+            const authorSchema = new schema.Entity('authors')
+            const postsSchema = new schema.Entity('posts',{
+                authors:authorSchema,
+            })
+            const normalizedData = normalize(chats, postsSchema)
+            console.log(JSON.stringify(normalizedData,null,2))
+            return {status:"success", payload:normalizedData}
+        }catch(err){
+            return {status:"error", error:err}
+        }
+    }
+
 
     async saveChat(chat){
         try{
