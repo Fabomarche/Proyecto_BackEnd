@@ -1,50 +1,12 @@
 import MongoContainer from "../../containers/MongoContainer.js";
+import messages from "../model/messages.js"
 import { normalize, schema } from 'normalizr'
 
 export default class ChatMongo extends MongoContainer{
     constructor(){
         super(
             'chats',
-            {
-                author:{
-                    id:{
-                        type:String,
-                        required:true
-                    },
-                    firstName:{
-                        type:String,
-                        required:true
-                    },
-                    lastName:{
-                        type:String,
-                        required:true
-                    },
-                    age:{
-                        type:Number,
-                        required:true
-                    },
-                    firstName:{
-                        type:String,
-                        required:true
-                    },
-                    alias:{
-                        type:String,
-                        required:true
-                    },
-                    avatarUrl:{
-                        type:String,
-                        required:true
-                    },
-                },
-                text:{
-                    type:String,
-                    required:true
-                },
-                date:{
-                    type:String,
-                    required:true
-                }
-            }, { timestamps: true }
+            
         )
     }
 

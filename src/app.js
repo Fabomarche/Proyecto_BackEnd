@@ -82,13 +82,24 @@ app.get('/views/products-test', (req,res) => {
 })
 
 
+//-----------Register---------------//
+app.post('/register',(req,res)=>{
+    let author = req.body
+    let result
+})
+
+
+
+//-----------End Register---------------//
+
+
 //-------------------- socket ----------------//
 io.on('connection', async socket => {
     console.log(`the socket ${socket.id} is connected`)
     let allProducts = await products.getAll()
     
     socket.emit('deliverProducts', allProducts.payload)
-    chats.getAllNormalizedChats()
+    chats.getAll()
     socket.emit('messagelog', await chats.getAll())
 
     socket.on('message', async data => {

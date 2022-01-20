@@ -31,12 +31,16 @@
 
     <div class="container d-flex flex-column justify-content-center mt-3 align-items-center border">
         <h2 class="text-center mt-3">Centro de Mensajes</h2>
-        <input id="email" type="email" class="form-control w-25 my-1" placeholder="Your E-mail" >
-        <input id="name" type="text" class="form-control w-25 my-1" placeholder="Name" >
-        <input id="lastName" type="text" class="form-control w-25 my-1" placeholder="Last Name" >
-        <input id="age" type="number" class="form-control w-25 my-1" placeholder="Age" >
-        <input id="alias" type="text" class="form-control w-25 my-1" placeholder="Alias" >
-        <input id="avatarUrl" type="text" class="form-control w-25 my-1" placeholder="Avatar url" >
+        <form id="RegisterForm">
+            <input id="id"  name="id" type="email" class="form-control my-1" placeholder="Your E-mail" >
+            <input id="firstName" name="firstName"  type="text" class="form-control my-1" placeholder="Name" >
+            <input id="lastName" name="lastName"  type="text" class="form-control my-1" placeholder="Last Name" >
+            <input id="age" name="age"  type="number" class="form-control my-1" placeholder="Age" >
+            <input id="alias" name="alias" type="text" class="form-control my-1" placeholder="Alias" >
+            <input id="avatarUrl" name="avatarUrl"  type="text" class="form-control my-1" placeholder="Avatar url" >
+            <input type="submit" value="Register">
+        </form>
+
         <div class="my-3 p-1 border">
             <div id="log" class="p-2"></div>
         </div>
